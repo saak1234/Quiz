@@ -1,0 +1,91 @@
+/* EnrollmentPage.css */
+
+.enrollment-container {
+    text-align: center;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .enroll-heading {
+    font-size: 2.1rem;
+    margin-bottom: 20px;
+  }
+  
+  .success-message {
+    color: green;
+    font-size: 2rem;
+  }
+  .error-message {
+    color:red;
+    font-size: 2rem;
+  }
+  .grade-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+  }
+  
+  .grade-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .grade-input {
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    transition: border-color 0.3s; /* Add a smooth transition for better user experience */
+  
+    /* Add focus and hover effects */
+    &:focus,
+    &:hover {
+      border-color: #007bff;
+      outline: none; /* Remove default outline on focus */
+    }
+  }
+  
+  .error-message {
+    color: red;
+  }
+
+  .enroll {
+    margin-bottom: 2rem;
+    padding: 0.43rem 1.1rem;
+    border-radius: 5px;
+  }
+
+  .cpi-input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px; /* Add margin for separation from the previous input */
+  }
+  
+  .cpi-label {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  .cpi-input {
+    padding: 10px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    transition: border-color 0.3s;
+    margin: 0 auto;
+  
+    &:focus,
+    &:hover {
+      border-color: #007bff;
+      outline: none;
+    }
+  }
+  
