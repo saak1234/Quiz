@@ -14,7 +14,7 @@ function Quiz() {
 
     const fetchQuizQuestions = async () => {
         try {
-            const response = await fetch('http://localhost:8080/quiz-questions');
+            const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quiz-questions');
             const data = await response.json();
             const shuffledQuestions = _.shuffle(data).slice(0, 5);
             setQuestions(shuffledQuestions);
