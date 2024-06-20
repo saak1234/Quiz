@@ -1,24 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import QuizResult from './QuizResult';
 
 function StartQuiz() {
-  const { quizId} = useParams(); // Get quizId and quizTitle from URL params
+  const { quizId } = useParams(); // Get quizId from URL params
   const [questions, setQuestions] = useState([]);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [clickedOption, setClickedOption] = useState(0);
   const [showResult, setShowResult] = useState(false);
-    console.log(quizId)
+
   useEffect(() => {
     fetchQuizQuestions();
   }, [quizId]); // Fetch questions when quizId changes
 
   const fetchQuizQuestions = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/quizzes/${quizId}/questions`);
-      const data = await response.data;
+      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch quiz questions');
+      }
+      const data = await response.json();
       console.log(data);
       setQuestions(data);
     } catch (error) {
@@ -37,7 +39,7 @@ function StartQuiz() {
   };
 
   const updateScore = () => {
-    if (clickedOption - 1 === questions[currentQuestion].answer) {
+    if (clickedOption - 1 === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
     }
   };
@@ -51,7 +53,7 @@ function StartQuiz() {
 
   return (
     <div className="min-h-screen bg-gray-200 flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold mb-8 text-blue-700">Quiz</h1> {/* Decode and display quiz title */}
+      <h1 className="text-4xl font-bold mb-8 text-blue-700">Quiz</h1>
       <div className="bg-white rounded-lg shadow-lg p-8 w-96">
         {showResult ? (
           <QuizResult score={score} totalScore={questions.length} tryAgain={resetAll} />

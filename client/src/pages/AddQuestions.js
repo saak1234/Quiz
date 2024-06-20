@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function AddQuestion() {
   const [quizzes, setQuizzes] = useState([]);
@@ -9,9 +8,13 @@ function AddQuestion() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/quizzes');
-        setQuizzes(response.data);
-        initializeQuestionForms(response.data);
+        const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes');
+        if (!response.ok) {
+          throw new Error('Failed to fetch quizzes');
+        }
+        const data = await response.json();
+        setQuizzes(data);
+        initializeQuestionForms(data);
       } catch (error) {
         console.error('Error fetching quizzes:', error);
       }
@@ -23,7 +26,7 @@ function AddQuestion() {
   const initializeQuestionForms = (quizzes) => {
     const initialForms = {};
     const initialQuestions = {};
-    quizzes.forEach(quiz => {
+    quizzes.forEach((quiz) => {
       initialForms[quiz._id] = false;
       initialQuestions[quiz._id] = { question: '', options: ['', '', '', ''], correctAnswer: 0 };
     });
@@ -32,7 +35,7 @@ function AddQuestion() {
   };
 
   const handleQuestionChange = (quizId, value) => {
-    setNewQuestions(prev => ({
+    setNewQuestions((prev) => ({
       ...prev,
       [quizId]: { ...prev[quizId], question: value }
     }));
@@ -41,14 +44,14 @@ function AddQuestion() {
   const handleOptionChange = (quizId, index, value) => {
     const updatedOptions = [...newQuestions[quizId].options];
     updatedOptions[index] = value;
-    setNewQuestions(prev => ({
+    setNewQuestions((prev) => ({
       ...prev,
       [quizId]: { ...prev[quizId], options: updatedOptions }
     }));
   };
 
   const handleCorrectAnswerChange = (quizId, value) => {
-    setNewQuestions(prev => ({
+    setNewQuestions((prev) => ({
       ...prev,
       [quizId]: { ...prev[quizId], correctAnswer: parseInt(value) }
     }));
@@ -56,11 +59,19 @@ function AddQuestion() {
 
   const addQuestionToQuiz = async (quizId) => {
     try {
-      const response = await axios.post(`http://localhost:8080/quizzes/${quizId}/questions`, newQuestions[quizId]);
+      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newQuestions[quizId])
+      });
       if (response.status === 201) {
         alert('Question added successfully');
-        setShowForm(prev => ({ ...prev, [quizId]: false }));
-      } 
+        setShowForm((prev) => ({ ...prev, [quizId]: false }));
+      } else {
+        throw new Error('Failed to add question');
+      }
     } catch (error) {
       console.error('Error adding question:', error);
     }
@@ -76,7 +87,7 @@ function AddQuestion() {
             <div className="px-6 py-4">
               <h3 className="text-xl font-bold text-blue-600 mb-2">{quiz.title}</h3>
               <button
-                onClick={() => setShowForm(prev => ({ ...prev, [quiz._id]: !prev[quiz._id] }))}
+                onClick={() => setShowForm((prev) => ({ ...prev, [quiz._id]: !prev[quiz._id] }))}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
               >
                 {showForm[quiz._id] ? 'Cancel' : 'Add Question'}

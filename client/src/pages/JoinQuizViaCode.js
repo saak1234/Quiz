@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import Quiz from './Quiz'; // Assuming you have a Quiz component to display quizzes
 
 function JoinQuiz() {

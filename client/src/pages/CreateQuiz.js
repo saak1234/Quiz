@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 function CreateQuiz() {
   const [quizTitle, setQuizTitle] = useState('');
@@ -34,18 +33,24 @@ function CreateQuiz() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const isValid = validateInputs();
     if (!isValid) return;
-  
+
     try {
-      const response = await axios.post('http://localhost:8080/create-quiz', { 
-        title: quizTitle,
-        description: quizDescription,
-        questions: questions    
+      const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/create-quiz', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: quizTitle,
+          description: quizDescription,
+          questions: questions    
+        }),
       });
-  
-      if (response.status === 201) {
+
+      if (response.ok) {
         console.log('Quiz created successfully');
         // Reset form fields after successful submission
         setQuizTitle('');

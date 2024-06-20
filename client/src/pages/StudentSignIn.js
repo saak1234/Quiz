@@ -19,7 +19,7 @@ export default function StudentSignIn() {
     const data = new FormData(event.currentTarget);
 
     try {
-      const response = await fetch('http://localhost:8080/signin', {
+      const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -19,7 +19,7 @@ export default function TeacherSignUp() {
 
     try {
       const data = new FormData(document.getElementById('form'));
-      const response = await fetch('http://localhost:8080/signup', {
+      const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
