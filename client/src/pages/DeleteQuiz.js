@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 function DeleteQuiz() {
   const [quizzes, setQuizzes] = useState([]);
@@ -7,8 +6,13 @@ function DeleteQuiz() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/quizzes');
-        setQuizzes(response.data); // Assuming the response data is the array of quizzes
+        const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes');
+        if (response.ok) {
+          const data = await response.json();
+          setQuizzes(data); // Assuming the response data is the array of quizzes
+        } else {
+          throw new Error('Failed to fetch quizzes');
+        }
       } catch (error) {
         console.error('Error fetching quizzes:', error);
       }
@@ -19,8 +23,10 @@ function DeleteQuiz() {
 
   const deleteHandler = async (quizId) => {
     try {
-      const response = await axios.delete(`http://localhost:8080/quizzes/${quizId}`);
-      if (response.status === 204) {
+      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}`, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
         // Filter out the quiz that has been deleted
         setQuizzes(currentQuizzes => currentQuizzes.filter(quiz => quiz._id !== quizId));
       } else {
