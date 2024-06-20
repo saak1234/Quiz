@@ -35,6 +35,7 @@ function DeleteQuiz() {
     } catch (error) {
       console.error('Error deleting quiz:', error);
     }
+    console.log("asdf");
   };
 
   return (
