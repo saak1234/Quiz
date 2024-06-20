@@ -19,7 +19,7 @@ export default function TeacherSignIn() {
 
     try {
       const data = new FormData(document.getElementById('form'));
-      const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/signin', {
+      const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/signin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

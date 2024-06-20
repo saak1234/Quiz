@@ -8,7 +8,7 @@ function BrowseQuiz() {
     // Fetch quizzes from the server
     const fetchQuizzes = async () => {
       try {
-        const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes'); // Adjust URL as per your backend API
+        const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/quizzes'); // Adjust URL as per your backend API
         if (!response.ok) {
           throw new Error('Failed to fetch quizzes');
         }
