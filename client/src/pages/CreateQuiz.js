@@ -38,7 +38,7 @@ function CreateQuiz() {
     if (!isValid) return;
 
     try {
-      const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/create-quiz', {
+      const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/create-quiz', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

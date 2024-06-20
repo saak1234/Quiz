@@ -16,7 +16,7 @@ function StartQuiz() {
 
   const fetchQuizQuestions = async () => {
     try {
-      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`);
+      const response = await fetch(`https://quizapi-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`);
       if (!response.ok) {
         throw new Error('Failed to fetch quiz questions');
       }

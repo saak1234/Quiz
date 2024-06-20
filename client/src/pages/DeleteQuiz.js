@@ -6,8 +6,8 @@ function DeleteQuiz() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes');
-        if (response.ok) {
+        const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/quizzes');
+          if (response.ok) {
           const data = await response.json();
           setQuizzes(data); // Assuming the response data is the array of quizzes
         } else {
@@ -23,7 +23,7 @@ function DeleteQuiz() {
 
   const deleteHandler = async (quizId) => {
     try {
-      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}`, {
+      const response = await fetch(`https://quizapi-saak1234s-projects.vercel.app/quizzes/${quizId}`, {
         method: 'DELETE',
       });
       if (response.ok) {

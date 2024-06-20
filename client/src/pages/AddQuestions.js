@@ -8,7 +8,10 @@ function AddQuestion() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await fetch('https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes');
+        const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/quizzes', {
+          method: 'GET',
+          credentials: 'include', // Include credentials if needed
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch quizzes');
         }
@@ -59,7 +62,7 @@ function AddQuestion() {
 
   const addQuestionToQuiz = async (quizId) => {
     try {
-      const response = await fetch(`https://quizapi-qkrvijzqg-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`, {
+      const response = await fetch(`https://quizapi-saak1234s-projects.vercel.app/quizzes/${quizId}/questions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
