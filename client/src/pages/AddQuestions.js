@@ -8,10 +8,7 @@ function AddQuestion() {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/quizzes', {
-          method: 'GET',
-          credentials: 'include', // Include credentials if needed
-        });
+        const response = await fetch('https://quizapi-saak1234s-projects.vercel.app/quizzes');
         if (!response.ok) {
           throw new Error('Failed to fetch quizzes');
         }
